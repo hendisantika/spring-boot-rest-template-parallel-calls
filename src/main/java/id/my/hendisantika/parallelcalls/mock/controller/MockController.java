@@ -37,4 +37,12 @@ public class MockController {
         logger.info("Response sent for mock data with id: {}", id);
         return response;
     }
+
+    // Simulates exception response
+    @GetMapping("/data/{id}/exception")
+    public MockResponse getMockDataException(@PathVariable String id) {
+        logger.info("Received a request for mock data with id: {}", id);
+
+        throw new RuntimeException("Something went wrong");
+    }
 }
