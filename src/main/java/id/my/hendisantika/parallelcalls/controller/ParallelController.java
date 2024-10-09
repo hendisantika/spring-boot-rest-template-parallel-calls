@@ -52,4 +52,15 @@ public class ParallelController {
         logger.info("Request processing completed for 'parallel' endpoint.");
         return listCompletableFuture;
     }
+
+    // Endpoint to trigger parallel data fetching with exception in one task
+    @GetMapping("/parallelWithExceptionIOneTask")
+    public CompletableFuture<List<MockResponse>> getParallelWithExceptionIOneTask() {
+        logger.info("Request received for 'parallelWithExceptionIOneTask' endpoint.");
+
+        CompletableFuture<List<MockResponse>> listCompletableFuture = parallelService.fetchAllDataWithErrorInOneCall();
+
+        logger.info("Request processing completed for 'parallelWithExceptionIOneTask' endpoint.");
+        return listCompletableFuture;
+    }
 }
