@@ -33,6 +33,10 @@ public class ParallelService {
 
     private final RestTemplate restTemplate;
 
+    public ParallelService() {
+        this.restTemplate = new RestTemplate();
+    }
+
     private final Executor executor = Executors.newFixedThreadPool(10);
 
     // Fetches data from a given URL asynchronously
@@ -94,7 +98,7 @@ public class ParallelService {
         return CompletableFuture.supplyAsync(() -> restTemplate.getForObject(url, MockResponse.class), executor)
                 .handle((result, ex) -> {
                     if (ex != null) {
-                        System.err.println("Error fetching data from " + url + ": " + ex.getMessage());
+                        log.error("Error fetching data from {}: {}", url, ex.getMessage());
                         return null;
                     }
                     return result;
