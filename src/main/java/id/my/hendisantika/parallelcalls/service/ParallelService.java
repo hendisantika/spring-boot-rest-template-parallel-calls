@@ -89,4 +89,16 @@ public class ParallelService {
             return null;
         });
     }
+
+    public CompletableFuture<MockResponse> fetchDataWithHandling(String url) {
+        return CompletableFuture.supplyAsync(() -> restTemplate.getForObject(url, MockResponse.class), executor)
+                .handle((result, ex) -> {
+                    if (ex != null) {
+                        System.err.println("Error fetching data from " + url + ": " + ex.getMessage());
+                        return null;
+                    }
+                    return result;
+                });
+    }
+
 }
