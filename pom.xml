@@ -12,29 +12,18 @@
     <artifactId>parallel-calls</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-boot-rest-template-parallel-calls</name>
-    <description>spring-boot-rest-template-parallel-calls</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
+    <description>A simple Spring Boot app showcasing how to make parallel API calls using RestTemplate and
+        CompletableFuture, which can also be used to implement the scatter-gather design pattern.
+    </description>
+
     <properties>
         <java.version>21</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
