@@ -1,0 +1,105 @@
+{
+  "info": {
+    "_postman_id": "cbad34a5-b5c1-4117-817c-b40aa1f031d5",
+    "name": "Spring Boot Rest Template Parallel Calls",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "276892"
+  },
+  "item": [
+    {
+      "name": "Endpoint to trigger single data fetching",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/fetchData",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "fetchData"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Endpoint to trigger parallel data fetching",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/parallel",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "parallel"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Endpoint to trigger parallel data fetching with exception in one task",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/parallelWithExceptionIOneTask",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "parallelWithExceptionIOneTask"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Endpoint to trigger parallel data fetching with a global timeout",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/parallelWithGlobalTimeout",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "parallelWithGlobalTimeout"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Endpoint to trigger parallel data fetching with individual task timeout",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "localhost:8080/api/parallelWithIndividualTaskTimeout",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "parallelWithIndividualTaskTimeout"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
