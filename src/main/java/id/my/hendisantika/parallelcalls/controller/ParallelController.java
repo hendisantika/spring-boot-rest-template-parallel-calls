@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -39,5 +40,16 @@ public class ParallelController {
 
         logger.info("Request processing completed for 'fetchData' endpoint.");
         return responseCompletableFuture;
+    }
+
+    // Endpoint to trigger parallel data fetching
+    @GetMapping("/parallel")
+    public CompletableFuture<List<MockResponse>> getParallelData() {
+        logger.info("Request received for 'parallel' endpoint.");
+
+        CompletableFuture<List<MockResponse>> listCompletableFuture = parallelService.fetchAllData();
+
+        logger.info("Request processing completed for 'parallel' endpoint.");
+        return listCompletableFuture;
     }
 }
