@@ -76,4 +76,17 @@ public class ParallelService {
                             .toList();
                 });
     }
+
+    // Fetches data asynchronously with a specified timeout
+    public CompletableFuture<MockResponse> fetchDataWithTimeout(String url, long timeout) {
+        CompletableFuture<MockResponse> future = CompletableFuture.supplyAsync(() -> restTemplate.getForObject(url, MockResponse.class), executor);
+        return future.orTimeout(timeout, TimeUnit.MILLISECONDS).exceptionally(ex -> {
+            if (ex instanceof TimeoutException) {
+                log.error("Timeout while fetching data from {}", url);
+            } else {
+                log.error("Some other exception encountered while fetching data from {}", url);
+            }
+            return null;
+        });
+    }
 }
