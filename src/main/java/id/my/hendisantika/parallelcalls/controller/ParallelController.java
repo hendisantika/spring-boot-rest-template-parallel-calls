@@ -1,11 +1,15 @@
 package id.my.hendisantika.parallelcalls.controller;
 
+import id.my.hendisantika.parallelcalls.mock.dto.MockResponse;
 import id.my.hendisantika.parallelcalls.service.ParallelService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Created by IntelliJ IDEA.
@@ -25,4 +29,15 @@ public class ParallelController {
     private static final Logger logger = LoggerFactory.getLogger(ParallelController.class);
 
     private final ParallelService parallelService;
+
+    // Endpoint to trigger single data fetching
+    @GetMapping("/fetchData")
+    public CompletableFuture<MockResponse> getData() {
+        logger.info("Request received for 'fetchData' endpoint.");
+
+        CompletableFuture<MockResponse> responseCompletableFuture = parallelService.fetchData("http://localhost:8080/mock/data/1");
+
+        logger.info("Request processing completed for 'fetchData' endpoint.");
+        return responseCompletableFuture;
+    }
 }
