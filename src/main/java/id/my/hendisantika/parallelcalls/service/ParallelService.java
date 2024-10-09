@@ -101,4 +101,17 @@ public class ParallelService {
                 });
     }
 
+    // Fetches data from multiple URLs in parallel and aggregates the results.
+    // One call with return null because error will be encountered in that call and as a fallback that will return null value
+    public CompletableFuture<List<MockResponse>> fetchAllDataWithErrorInOneCall() {
+        CompletableFuture<MockResponse> call1 = fetchDataWithHandling("http://localhost:8080/mock/data/1");
+        CompletableFuture<MockResponse> call2 = fetchDataWithHandling("http://localhost:8080/mock/data/2/exception");
+        CompletableFuture<MockResponse> call3 = fetchDataWithHandling("http://localhost:8080/mock/data/3");
+
+        return CompletableFuture.allOf(call1, call2, call3)
+                .thenApply(v -> Stream.of(call1, call2, call3)
+                        .map(CompletableFuture::join)
+                        .filter(Objects::nonNull)
+                        .toList());
+    }
 }
