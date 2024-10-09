@@ -63,4 +63,15 @@ public class ParallelController {
         logger.info("Request processing completed for 'parallelWithExceptionIOneTask' endpoint.");
         return listCompletableFuture;
     }
+
+    // Endpoint to trigger parallel data fetching with a global timeout
+    @GetMapping("/parallelWithGlobalTimeout")
+    public CompletableFuture<List<MockResponse>> getParallelDataWithGlobalTimeout() {
+        logger.info("Request received for 'parallelWithTimeout' endpoint.");
+
+        CompletableFuture<List<MockResponse>> listCompletableFuture = parallelService.fetchAllDataWithTimeout(1000, 5000);
+
+        logger.info("Request processing completed for 'parallelWithTimeout' endpoint.");
+        return listCompletableFuture;
+    }
 }
