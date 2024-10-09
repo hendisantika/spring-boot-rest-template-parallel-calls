@@ -74,4 +74,15 @@ public class ParallelController {
         logger.info("Request processing completed for 'parallelWithTimeout' endpoint.");
         return listCompletableFuture;
     }
+
+    // Endpoint to trigger parallel data fetching with individual task timeout
+    @GetMapping("/parallelWithIndividualTaskTimeout")
+    public CompletableFuture<List<MockResponse>> getParallelWithIndividualTaskTimeout() {
+        logger.info("Request received for 'parallelWithIndividualTaskTimeout' endpoint.");
+
+        CompletableFuture<List<MockResponse>> listCompletableFuture = parallelService.fetchAllDataWithTimeout(10000, 2000);
+
+        logger.info("Request processing completed for 'parallelWithIndividualTaskTimeout' endpoint.");
+        return listCompletableFuture;
+    }
 }
