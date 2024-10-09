@@ -1,8 +1,13 @@
 package id.my.hendisantika.parallelcalls.service;
 
+import id.my.hendisantika.parallelcalls.mock.dto.MockResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,4 +24,11 @@ import org.springframework.web.client.RestTemplate;
 public class ParallelService {
 
     private final RestTemplate restTemplate;
+
+    private final Executor executor = Executors.newFixedThreadPool(10);
+
+    // Fetches data from a given URL asynchronously
+    public CompletableFuture<MockResponse> fetchData(String url) {
+        return CompletableFuture.supplyAsync(() -> restTemplate.getForObject(url, MockResponse.class), executor);
+    }
 }
